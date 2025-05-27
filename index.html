@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Netherlands Solar PV GIS</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+  />
+  <style>
+    #map { height: 100vh; width: 100%; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  <script>
+    // Initialize map centered on Netherlands
+    const map = L.map('map').setView([52.1, 5.1], 8);
+
+    // Add OpenStreetMap baselayer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OSM contributors'
+    }).addTo(map);
+
+    // Add PDOK WMS example: Natura 2000 protected areas
+    const natura2000 = L.tileLayer.wms('https://geodata.nationaalgeoregister.nl/natura2000/wms', {
+      layers: 'natura2000',
+      format: 'image/png',
+      transparent: true,
+      attribution: 'PDOK Natura2000'
+    }).addTo(map);
+  </script>
+</body>
+</html>
